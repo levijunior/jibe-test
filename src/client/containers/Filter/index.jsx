@@ -36,10 +36,10 @@ export default function Filter() {
     const filterOptions = {
       ...filterItems,
       [name]: options,
-    }
-    setFilterItems(filterOptions)
+    };
+    setFilterItems(filterOptions);
 
-    const queryString = Object.keys(filterOptions).map(key => key + '=' + filterOptions[key]).join('&');
+    const queryString = Object.keys(filterOptions).map(key => `${key}=${filterOptions[key]}`).join('&');
     const hasFilter = Object.keys(filterOptions).filter(item => filterOptions[item].length);
 
     if (hasFilter.length) {
@@ -47,14 +47,14 @@ export default function Filter() {
     } else {
       navigate('/');
     }
-  }
+  };
 
   const handleSort = () => {
     dispatch({
       type: 'SET_SORT',
       sortUp: !state.sortUp,
     });
-  }
+  };
 
   return (
     <>

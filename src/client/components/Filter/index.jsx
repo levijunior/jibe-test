@@ -22,11 +22,14 @@ export default function Filter({ filterName, elements, onClick }) {
     };
     setOptions(udatedOptions);
     onClick(filterName, udatedOptions);
-  }
+  };
 
   return (
     <FilterGroup>
-      <FilterName>{filterName}:</FilterName>
+      <FilterName>
+        {filterName}
+        :
+      </FilterName>
       {Object.keys(options).map(el => (
         <FilterElement onClick={() => handleFilter(el)} key={el}>
           <FilterBox className={options[el] ? 'active' : ''} />

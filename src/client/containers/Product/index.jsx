@@ -20,7 +20,9 @@ export default function ProductContainer({ id }) {
         navigate('/');
       });
 
-    () => setProductDetails();
+    return () => {
+      setProductDetails();
+    };
   }, []);
 
   if (!productDetails) return null;
@@ -29,7 +31,7 @@ export default function ProductContainer({ id }) {
     if (productDetails.in_stock.toLowerCase() === 'yes') {
       dispatch({
         type: 'UPDATE_CART',
-        cart:[cart],
+        cart: [cart],
       });
     }
   };

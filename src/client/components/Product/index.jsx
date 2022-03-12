@@ -20,35 +20,36 @@ import {
 
 export default function Product({ productData: product, handleShoppingCart }) {
   const [sizeIndex, setSizeIndex] = useState(0);
-  product.sizes = [...new Set(product.sizes)];
-  const inStock = product.in_stock.toLowerCase() === 'yes';
+  const newProduct = { ...product };
+  newProduct.sizes = [...new Set(product.sizes)];
+  const inStock = newProduct.in_stock.toLowerCase() === 'yes';
 
   return (
     <ProductWrapper>
       <ProductTextWrapper>
 
         <ProductTextTitle>
-          { product.title }
+          { newProduct.title }
         </ProductTextTitle>
 
         <ProductTextCategory>
-          {product.categories.join(', ')}
+          {newProduct.categories.join(', ')}
         </ProductTextCategory>
 
         <ProductDetailsWrapper>
           <div>
             <ProductDetailLabel>Price:</ProductDetailLabel>
-            <ProductTextPrice>{product.price}</ProductTextPrice>
-            <ProductTextSalePrice>{product.sale_price}</ProductTextSalePrice>
+            <ProductTextPrice>{newProduct.price}</ProductTextPrice>
+            <ProductTextSalePrice>{newProduct.sale_price}</ProductTextSalePrice>
           </div>
           <div>
             <ProductDetailLabel>Color:</ProductDetailLabel>
-            <ProductColor bg-color={product.color} />
+            <ProductColor bg-color={newProduct.color} />
           </div>
           <div>
             <ProductDetailLabel>Sizes:</ProductDetailLabel>
             <ProductSizeWapper>
-              {product.sizes.map((size, index) => (
+              {newProduct.sizes.map((size, index) => (
                 <ProductSize
                   key={size}
                   onClick={() => setSizeIndex(index)}
@@ -70,7 +71,7 @@ export default function Product({ productData: product, handleShoppingCart }) {
       </ProductTextWrapper>
 
       <ProductImageWrapper>
-        <img src={product.images[0].url} alt={product.title} />
+        <img src={newProduct.images[0].url} alt={newProduct.title} />
       </ProductImageWrapper>
     </ProductWrapper>
   );

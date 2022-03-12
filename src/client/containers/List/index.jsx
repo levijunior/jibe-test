@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard';
 import { ListWrapper } from '../../components/List/atoms';
 import { useAppContext } from '../../store/context';
@@ -12,7 +12,7 @@ export default function List() {
 
   const queryParams = window.location.search;
 
-  const stringToNumber = (value) => Number(value.replace(/[^0-9.-]+/g,""));
+  const stringToNumber = value => Number(value.replace(/[^0-9.-]+/g, ''));
 
   useEffect(() => {
     fetch(`/api/products${queryParams}`)
@@ -27,7 +27,8 @@ export default function List() {
 
   useEffect(() => {
     const op = state.sortUp ? 1 : -1;
-    const sortProducts = [...products].sort((a, b) => (stringToNumber(a.price) > stringToNumber(b.price)) ? (1 * op) : (-1 * op));
+    const sortProducts = [...products].sort((a, b) => (
+      (stringToNumber(a.price) > stringToNumber(b.price)) ? (1 * op) : (-1 * op)));
     setProducts(sortProducts);
   }, [state.sortUp]);
 
