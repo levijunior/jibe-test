@@ -3,7 +3,7 @@ import { string, func } from 'prop-types';
 import {
   CardWrapper,
   CardImage,
-  CardTextWapper,
+  CardTextWrapper,
   TextCardCategory,
   TextCardTitle,
   TextCardPrice,
@@ -26,12 +26,12 @@ export default function ProductCard({
       <CardImage>
         <img src={image} alt={title} />
       </CardImage>
-      <CardTextWapper>
+      <CardTextWrapper>
         <TextCardCategory>{category}</TextCardCategory>
         <TextCardTitle>{title}</TextCardTitle>
         <TextCardPrice>{price}</TextCardPrice>
         <TextCardSalePrice>{salesPrice}</TextCardSalePrice>
-      </CardTextWapper>
+      </CardTextWrapper>
     </CardWrapper>
   );
 }

@@ -27,12 +27,34 @@ export const ProductImageWrapper = styled.div`
   overflow: hidden;
   border: 1px solid #ebebeb;
   margin: 25px;
+  display:grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 1px;
 
-  & > img {
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
-    object-position: center;
+  & > div {
+    overflow: hidden;
+
+    &:nth-child(1) {
+      grid-column: 1;
+		  grid-row: 1;
+    }
+
+    &:nth-child(2) {
+      grid-column: 1 ;
+		  grid-row: 2 ;
+    }
+
+    &:nth-child(3) {
+      grid-column: 2 ;
+		  grid-row: 1 / 3;
+    }
+
+    & > img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      object-position: center;
+    }
   }
 
   @media(max-width: 800px) {
@@ -100,7 +122,7 @@ export const ProductColor = styled.div`
   background: ${props => props['bg-color']};
 `;
 
-export const ProductSizeWapper = styled.div`
+export const ProductSizeWrapper = styled.div`
   display: flex;
 `;
 

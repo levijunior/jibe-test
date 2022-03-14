@@ -13,7 +13,7 @@ import {
   ProductTextPrice,
   ProductTextSalePrice,
   ProductColor,
-  ProductSizeWapper,
+  ProductSizeWrapper,
   ProductSize,
   AddCartButton,
 } from './atoms';
@@ -48,7 +48,7 @@ export default function Product({ productData: product, handleShoppingCart }) {
           </div>
           <div>
             <ProductDetailLabel>Sizes:</ProductDetailLabel>
-            <ProductSizeWapper>
+            <ProductSizeWrapper>
               {newProduct.sizes.map((size, index) => (
                 <ProductSize
                   key={size}
@@ -58,7 +58,7 @@ export default function Product({ productData: product, handleShoppingCart }) {
                   {size}
                 </ProductSize>
               ))}
-            </ProductSizeWapper>
+            </ProductSizeWrapper>
           </div>
         </ProductDetailsWrapper>
 
@@ -71,7 +71,15 @@ export default function Product({ productData: product, handleShoppingCart }) {
       </ProductTextWrapper>
 
       <ProductImageWrapper>
-        <img src={newProduct.images[0].url} alt={newProduct.title} />
+        {newProduct.images.map((img, index) => (
+          <div>
+            <img
+              key={img.url}
+              src={img.url}
+              alt={`${newProduct.title} image ${index}`}
+            />
+          </div>
+        ))}
       </ProductImageWrapper>
     </ProductWrapper>
   );

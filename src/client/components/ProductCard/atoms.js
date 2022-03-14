@@ -26,7 +26,7 @@ export const CardImage = styled.div`
   }
 `;
 
-export const CardTextWapper = styled.div`
+export const CardTextWrapper = styled.div`
   padding: 25px;
 `;
 
