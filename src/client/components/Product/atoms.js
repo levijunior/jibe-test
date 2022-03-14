@@ -27,7 +27,7 @@ export const ProductImageWrapper = styled.div`
   overflow: hidden;
   border: 1px solid #ebebeb;
   margin: 25px;
-  display:grid;
+  display: grid;
   grid-template-columns: 50% 50%;
   grid-gap: 1px;
 
@@ -36,17 +36,17 @@ export const ProductImageWrapper = styled.div`
 
     &:nth-child(1) {
       grid-column: 1;
-		  grid-row: 1;
+      grid-row: 1;
     }
 
     &:nth-child(2) {
       grid-column: 1 ;
-		  grid-row: 2 ;
+      grid-row: 2 ;
     }
 
     &:nth-child(3) {
       grid-column: 2 ;
-		  grid-row: 1 / 3;
+      grid-row: 1 / 3;
     }
 
     & > img {

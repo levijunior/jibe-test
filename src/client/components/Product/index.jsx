@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   shape, string, number, arrayOf, func,
 } from 'prop-types';
+import Title from './Title';
+import Category from './Category';
+import Details from './Details';
+import Image from './Image';
 import {
   ProductWrapper,
   ProductTextWrapper,
-  ProductImageWrapper,
-  ProductTextTitle,
-  ProductTextCategory,
-  ProductDetailsWrapper,
-  ProductDetailLabel,
-  ProductTextPrice,
-  ProductTextSalePrice,
-  ProductColor,
-  ProductSizeWrapper,
-  ProductSize,
   AddCartButton,
 } from './atoms';
 
 export default function Product({ productData: product, handleShoppingCart }) {
-  const [sizeIndex, setSizeIndex] = useState(0);
   const newProduct = { ...product };
   newProduct.sizes = [...new Set(product.sizes)];
   const inStock = newProduct.in_stock.toLowerCase() === 'yes';
@@ -27,41 +20,9 @@ export default function Product({ productData: product, handleShoppingCart }) {
   return (
     <ProductWrapper>
       <ProductTextWrapper>
-
-        <ProductTextTitle>
-          { newProduct.title }
-        </ProductTextTitle>
-
-        <ProductTextCategory>
-          {newProduct.categories.join(', ')}
-        </ProductTextCategory>
-
-        <ProductDetailsWrapper>
-          <div>
-            <ProductDetailLabel>Price:</ProductDetailLabel>
-            <ProductTextPrice>{newProduct.price}</ProductTextPrice>
-            <ProductTextSalePrice>{newProduct.sale_price}</ProductTextSalePrice>
-          </div>
-          <div>
-            <ProductDetailLabel>Color:</ProductDetailLabel>
-            <ProductColor bg-color={newProduct.color} />
-          </div>
-          <div>
-            <ProductDetailLabel>Sizes:</ProductDetailLabel>
-            <ProductSizeWrapper>
-              {newProduct.sizes.map((size, index) => (
-                <ProductSize
-                  key={size}
-                  onClick={() => setSizeIndex(index)}
-                  className={sizeIndex === index ? 'active' : ''}
-                >
-                  {size}
-                </ProductSize>
-              ))}
-            </ProductSizeWrapper>
-          </div>
-        </ProductDetailsWrapper>
-
+        <Title title={newProduct.title} />
+        <Category categories={newProduct.categories} />
+        <Details product={newProduct} />
         <AddCartButton
           disabled={!inStock}
           onClick={() => handleShoppingCart(product)}
@@ -70,17 +31,7 @@ export default function Product({ productData: product, handleShoppingCart }) {
         </AddCartButton>
       </ProductTextWrapper>
 
-      <ProductImageWrapper>
-        {newProduct.images.map((img, index) => (
-          <div>
-            <img
-              key={img.url}
-              src={img.url}
-              alt={`${newProduct.title} image ${index}`}
-            />
-          </div>
-        ))}
-      </ProductImageWrapper>
+      <Image images={newProduct.images} title={newProduct.title} />
     </ProductWrapper>
   );
 }
