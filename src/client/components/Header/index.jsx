@@ -37,19 +37,21 @@ export default function Header() {
       {showCartList
         && (
         <CartList>
-          {cartItems.map(item => (
-            <CartListItem key={item.id}>
-              <p>{item.title}</p>
-              <p>
-                <small>
-                  {cartItemsQtd[item.id]}
-                  X
-                </small>
-                {' '}
-                <b>{item.sale_price}</b>
-              </p>
-            </CartListItem>
-          ))}
+          {state.cart.length ? (
+            cartItems.map(item => (
+              <CartListItem key={item.id}>
+                <p>{item.title}</p>
+                <p>
+                  <small>
+                    {cartItemsQtd[item.id]}
+                    X
+                  </small>
+                  {' '}
+                  <b>{item.sale_price}</b>
+                </p>
+              </CartListItem>
+            ))
+          ) : <p>Empty</p>}
         </CartList>
         )
       }

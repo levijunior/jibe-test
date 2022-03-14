@@ -60,6 +60,7 @@ export const ProductImageWrapper = styled.div`
   @media(max-width: 800px) {
     width: 100%;
     margin: 0;
+    aspect-ratio: 1;
   }
 `;
 
