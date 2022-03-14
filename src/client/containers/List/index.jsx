@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { string } from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import ProductCard from '../../components/ProductCard';
 import { ListWrapper } from '../../components/List/atoms';
 import { useAppContext } from '../../store/context';
 
-export default function List() {
+export default function List({ searchValue }) {
   const [products, setProducts] = useState([]);
+  const [productsFiltered, setProductsFiltered] = useState([]);
   const navigate = useNavigate();
 
   const { state } = useAppContext();
@@ -19,6 +21,7 @@ export default function List() {
       .then(resp => resp.json())
       .then((data) => {
         setProducts(data);
+        setProductsFiltered(data);
       })
       .catch((error) => {
         console.error(error);
@@ -26,10 +29,16 @@ export default function List() {
   }, [queryParams]);
 
   useEffect(() => {
+    const rx = new RegExp(searchValue, 'gi');
+    const result = products.filter(item => item.title.match(rx));
+    setProductsFiltered(result);
+  }, [searchValue]);
+
+  useEffect(() => {
     const op = state.sortUp ? 1 : -1;
-    const sortProducts = [...products].sort((a, b) => (
-      (stringToNumber(a.price) > stringToNumber(b.price)) ? (1 * op) : (-1 * op)));
-    setProducts(sortProducts);
+    const sortProducts = [...productsFiltered].sort((a, b) => (
+      (stringToNumber(a.price) > stringToNumber(b.sale_price)) ? (1 * op) : (-1 * op)));
+    setProductsFiltered(sortProducts);
   }, [state.sortUp]);
 
   const handleClick = (productId) => {
@@ -42,7 +51,7 @@ export default function List() {
 
   return (
     <ListWrapper>
-      {products.map(product => (
+      {productsFiltered.map(product => (
         <ProductCard
           key={product.id}
           image={product.thumbnail}
@@ -56,3 +65,11 @@ export default function List() {
     </ListWrapper>
   );
 }
+
+List.propTypes = {
+  searchValue: string,
+};
+
+List.defaultProps = {
+  searchValue: '',
+};
